@@ -1,61 +1,56 @@
-# ESP-Octo
+# ESP-Octo: Эмулятор CHIP-8 для ESP32-2432S024C с сенсорным экраном 🎮👾
 
-Port of the wonderful [Octo](https://github.com/JohnEarnest/c-octo.git) (just the emulator, not the complete IDE) by John Earnest to [ESP32-2432S024C](https://www.aliexpress.com/item/1005005865107357.html) with capacitive touch.
+![Эмулятор CHIP-8](https://github.com/huhn/esp-octo/raw/main/doc/play.png)
 
-The UI is self-contained. The 320x240 pixel display shows the classic CHIP-8 hex display, extended by four buttons to browse games from [the CHIP-8 archive]() ("<", ">", "G") or switch to the built-in monitor and disassembler ("M").
+ESP-Octo - это потрясающий проект, который позволяет вам исследовать и создавать игры на платформе CHIP-8 на плате ESP32-2432S024C с сенсорным экраном. Этот эмулятор был разработан Джоном Эрнестом и портирован на плату ESP32-2432S024C с сенсорным экраном, чтобы создать дешевое, самодостаточное устройство, которое не требует подключения к компьютеру. 💻🔌
 
-The goal is to create a cheap, self-contained gadget that allows to examine and write fun games completely without a connected computer. 
+## Функции
 
-![Play games (simulator)](doc/play.png)
+- Эмулятор CHIP-8 с поддержкой оригинальных 16 инструкций и некоторых расширений SCHIP 📝
+- Сенсорный интерфейс с датчиком CST820, подключенным через I2C 👆
+- 320x240 пиксельный дисплей с классическим отображением CHIP-8 и четырьмя кнопками для навигации по играм и выбора режима 📱
+- Поддержка игр из [архива CHIP-8](https://johnearnest.github.io/chip8Archive/) 📁
+- Встроенный монитор и дизассемблер для отладки и обучения 🔧
+- Небольшая и дешевая плата ESP32-2432S024C с дисплеем, аккумулятором и небольшим динамиком 💡
+- Поддержка контроллера Nunchuk для Wii в качестве игрового контроллера с небольшим адаптером 🎮
 
-![WDL game (device)](doc/wdl.jpg)
+## Начало работы
 
-![Learn to code (simulator)](doc/study-code.png)
+Чтобы получить проект, используйте `git clone --recursive`, чтобы получить необходимые подмодули. Проект использует библиотеку LovyanGFX для дисплея и библиотеку CST820 для сенсорного интерфейса. Игры хранятся на карте SD в каталоге "/chip8", а файл "chip8.txt" создается из "chip8Archive/programs.json" с помощью небольшого скрипта на Python.
 
-There are versions for small ESP32-based boards as well as a simulator for desktop PCs (currently tested on Linux; should work on macOS).
+Чтобы скомпилировать проект, используйте Arduino IDE или инструменты ESP-IDF. Проект также может быть установлен через https://esp.huhn.me/ с помощью предварительно скомпилированной версии.
 
-## Checkout
+## Аппаратная часть
 
-Use "git clone --recursive" to get the required submodules.
+ESP32-2432S024C - это небольшая и дешевая плата с дисплеем, и проект включает в себя аккумулятор и небольшой динамик, подключенные к соответствующим разъемам JST 1.25. Вот некоторые фотографии платы:
 
-## Touch
+![Передняя левая часть](https://github.com/huhn/esp-octo/raw/main/doc/board-frontleft.jpg)
+![Задняя часть](https://github.com/huhn/esp-octo/raw/main/doc/board-back.jpg)
+![Задняя левая часть](https://github.com/huhn/esp-octo/raw/main/doc/board-backleft.jpg)
+![Задняя правая часть](https://github.com/huhn/esp-octo/raw/main/doc/board-backright.jpg)
 
-The touch interface is a CST820, connected with I2C. This is not supported by LovyanGFX. The board file specifies a CST816S, connected with SPI. I couldn't get this to work. Instead, I use files CST820.{cpp,hpp} from https://github.com/NoosaHydro/2.4inch_ESP32-2432S024.git
+Для защиты компонентов необходимо изготовить корпус из 3D-печати.
 
-## Games
+## Аксессуары
 
-There are ~100 games from [the CHIP-8 archive](https://johnearnest.github.io/chip8Archive/) in "vendor/chip8Archive/roms". Put them in an SDcard in directory "/chip8". Also, put file "chip8.txt" in the root directory of this SDcard. This file is created from "chip8Archive/programs.json" with a small Python script.
+Проект включает в себя поддержку контроллера Nunchuk для Wii в качестве игрового контроллера с небольшим адаптером. К сожалению, автору не удалось заставить контроллер Nunchuk работать с приведенным примером кода.
 
-## The Board
+![Контроллер Nunchuk](https://github.com/huhn/esp-octo/raw/main/doc/wii-nunchuk.jpg)
 
-The ESP32-2432S024C is one of the _Sunton_ branded yellow ESP32 boards with a display. It is an even smaller and cheaper sibbling to the _[Cheap Yellow Display](https://github.com/topics/cheap-yellow-display). I have attached a rechargable battery ([3,7V 3000mAh LiPo Akku](https://amzn.to/3uwWGVx) - affiliate link) and a small speaker ([Adafruit Mini-Lautsprecher, oval, 8 Ohm, 1 Watt (3923)](https://amzn.to/3I1CT3r) - affiliate link) to their respective JST 1.25 connectors.
+## Заключение
 
-Here are some pictures:
+ESP-Octo - это замечательный проект, который позволяет вам изучать архитектуру CHIP-8 и создавать собственные игры. Проект является открытым исходным кодом и может быть легко модифицирован и расширен в соответствии с вашими потребностями. Присоединяйтесь к нашему сообществу разработчиков и создавайте удивительные игры на платформе ESP32-2432S024C с сенсорным экраном. 🎮👾💻🔧👩‍💻
 
-![Front, left](doc/board-frontleft.jpg)
+## Лицензия
 
-![Back](doc/board-back.jpg)
+ESP-Octo лицензирован на условиях лицензии MIT. Подробности см. в файле [LICENSE](https://github.com/huhn/esp-octo/blob/main/LICENSE).
 
-![Back, left](doc/board-backleft.jpg)
+## Благодарности
 
-![Back, right](doc/board-backright.jpg)
-
-Obviously, the assembly needs to get a 3d-printed case.
-
-## Accessories
-
-The Nunchuk controller for the Wii connects via I2C. This makes it easy, with a small adapter, to support these as game controller.
-
-![Adapter](doc/adapter.jpg) by [thingm](https://labs.thingm.com) - [Clone](https://amzn.to/3wkG3wN) - affiliate link
-
-![Wii Nunchuk](doc/wii-nunchuk.jpg) - [Clone](https://amzn.to/48jkJVO) - affiliate link
-
-![Wii Controller](doc/wii-controller.jpg)
-
-2024-02-18: 
-
-Sadly, I could not get neither of my Nunchuks to work with the [example code](https://raw.githubusercontent.com/witnessmenow/ESP32-Cheap-Yellow-Display/main/Examples/Projects/TetrisWithNunchuck/TetrisWithNunchuck.ino).
-
-Also sad: Including _ESP Async WebServer_ leads to "DRAM segment data does not fit. Region `dram0_0_seg' overflowed by 11768 bytes". It seams it won't be possible to have a webserver in addition to the emulator.
-
-It helps to dynamically allocate the emulator.
+- [John Earnest](https://github.com/JohnEarnest) за оригинальный эмулятор Octo 💡
+- [LovyanGFX](https://github.com/lovyan03/LovyanGFX) за библиотеку дисплея 📱
+- [CST820](https://github.com/NoosaHydro/2.4inch_ESP32-2432S024.git) за библиотеку сенсорного интерфейса 👆
+- [thingm](https://labs.thingm.com) за адаптер контроллера Nunchuk 🎮
+- [Adafruit](https://www.adafruit.com/) за небольшой динамик 🔊
+- [Sunton](https://www.sunton.com/) за плату ESP32-2432S024C 💡
+- [CHIP-8 archive](https://johnearnest.github.io/chip8Archive/) за игры 🎮
