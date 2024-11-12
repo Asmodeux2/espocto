@@ -51,6 +51,7 @@ ESP-Octo лицензирован на условиях лицензии MIT. П
 ## Благодарности
 
 - [John Earnest](https://github.com/JohnEarnest) за оригинальный эмулятор Octo 💡
+- [codekulturbonn](https://github.com/codekulturbonn/espocto) за портирование на ESP32-2432S024C 💡
 - [LovyanGFX](https://github.com/lovyan03/LovyanGFX) за библиотеку дисплея 📱
 - [CST820](https://github.com/NoosaHydro/2.4inch_ESP32-2432S024.git) за библиотеку сенсорного интерфейса 👆
 - [thingm](https://labs.thingm.com) за адаптер контроллера Nunchuk 🎮
